@@ -1,0 +1,510 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Parisienne&display=swap");
+
+:root {
+  --bg: #080303;
+  --bg-soft: #160706;
+  --wine: #7f0808;
+  --wine-dark: #3c0304;
+  --gold: #c49a4a;
+  --gold-soft: #e2c985;
+  --cream: #fbf8ef;
+  --ink: #251c18;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--bg);
+  color: #fff;
+  font-family: "Cormorant Garamond", Georgia, serif;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+button {
+  font: inherit;
+}
+
+.d-none {
+  display: none !important;
+}
+
+/* ---------- Opening doors ---------- */
+.door-scene {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 50% 46%,
+      rgba(145, 17, 19, 0.28),
+      transparent 35%
+    ),
+    linear-gradient(145deg, #040202, #1b0505 48%, #050202);
+  display: grid;
+  place-items: center;
+}
+
+.ambient-glow {
+  position: absolute;
+  width: 52vmax;
+  height: 52vmax;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(226, 201, 133, 0.15),
+    transparent 66%
+  );
+  filter: blur(8px);
+  animation: pulseGlow 3.5s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  50% {
+    transform: scale(1.08);
+    opacity: 0.65;
+  }
+}
+
+.door-copy {
+  position: absolute;
+  z-index: 4;
+  text-align: center;
+  top: 13%;
+  width: 100%;
+  padding: 0 20px;
+  pointer-events: none;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+  font-size: 0.72rem;
+  color: var(--gold-soft);
+}
+
+.door-copy h1 {
+  margin: 8px 0;
+  font-size: clamp(2.5rem, 6vw, 5.4rem);
+  font-weight: 400;
+  color: #f4dfaa;
+  font-family: "Parisienne", cursive;
+  letter-spacing: 0.04em;
+  text-shadow: 0 6px 18px rgba(0, 0, 0, 0.38);
+}
+
+.door-copy h1 span {
+  color: #fff;
+  font-style: italic;
+}
+
+.door-subtitle {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+.tap-hint {
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.78rem;
+}
+
+.open-door-btn {
+  position: absolute;
+  z-index: 8;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 190px;
+  padding: 14px 24px;
+  border: 1px solid rgba(226, 201, 133, 0.65);
+  border-radius: 999px;
+  color: #f9e6ad;
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  transition: 0.3s ease;
+}
+
+.open-door-btn:hover {
+  background: rgba(127, 8, 8, 0.5);
+  box-shadow: 0 0 30px rgba(196, 154, 74, 0.18);
+}
+
+.door-knob {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 10px rgba(226, 201, 133, 0.8);
+}
+
+.doors {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  perspective: 1400px;
+  pointer-events: none;
+}
+
+.door {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04),
+      transparent 18%,
+      transparent 82%,
+      rgba(0, 0, 0, 0.22)
+    ),
+    linear-gradient(135deg, #4c0808, #190304 65%, #4a0808);
+  border: 2px solid rgba(196, 154, 74, 0.48);
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.55);
+  transition: transform 1.55s cubic-bezier(0.72, 0, 0.15, 1);
+  overflow: hidden;
+}
+
+.door-left {
+  transform-origin: left center;
+  border-right: 1px solid rgba(226, 201, 133, 0.35);
+}
+
+.door-right {
+  transform-origin: right center;
+  border-left: 1px solid rgba(226, 201, 133, 0.35);
+}
+
+.doors.open .door-left {
+  transform: rotateY(-105deg);
+}
+.doors.open .door-right {
+  transform: rotateY(105deg);
+}
+
+.door-panel {
+  position: absolute;
+  border: 1px solid rgba(226, 201, 133, 0.22);
+  inset: 12% 12%;
+}
+
+.panel-b {
+  inset: 28% 24%;
+}
+.panel-c {
+  inset: 42% 31%;
+}
+
+.door-ornament {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+  color: rgba(226, 201, 133, 0.65);
+}
+
+.door-right .door-ornament {
+  transform: translate(-50%, -50%) scaleX(-1);
+}
+
+.door-handle {
+  position: absolute;
+  top: 52%;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #e2c985;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(226, 201, 133, 0.4);
+}
+
+.door-left .door-handle {
+  right: 12%;
+}
+.door-right .door-handle {
+  left: 12%;
+}
+
+.door-floor {
+  position: absolute;
+  z-index: 2;
+  bottom: -9%;
+  width: 120%;
+  height: 28%;
+  background: radial-gradient(
+    ellipse,
+    rgba(196, 154, 74, 0.24),
+    transparent 68%
+  );
+}
+
+.bell-visual {
+  position: absolute;
+  z-index: 3;
+  color: rgba(226, 201, 133, 0.24);
+  font-size: 8rem;
+  animation: ring 2.5s ease-in-out infinite;
+}
+
+.bell-one {
+  left: 9%;
+  bottom: 14%;
+}
+.bell-two {
+  right: 9%;
+  bottom: 14%;
+  animation-delay: 0.6s;
+}
+
+@keyframes ring {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  10% {
+    transform: rotate(10deg);
+  }
+  20% {
+    transform: rotate(-10deg);
+  }
+  30% {
+    transform: rotate(6deg);
+  }
+  40% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(0);
+  }
+}
+
+.door-scene.opened {
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.9s ease,
+    visibility 0.9s ease;
+  transition-delay: 1.2s;
+}
+
+/* ---------- Invitation ---------- */
+.invitation-scene {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(127, 8, 8, 0.24), transparent 35%),
+    linear-gradient(180deg, #110303, #050202 75%);
+  padding-bottom: 50px;
+}
+
+.topbar {
+  position: relative;
+  z-index: 10;
+}
+
+.glass-btn {
+  border: 1px solid rgba(226, 201, 133, 0.34);
+  color: #f2dfad;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+  padding: 8px 14px;
+  backdrop-filter: blur(10px);
+}
+
+.intro-card {
+  color: #f6ead0;
+  padding: 24px 12px 8px;
+}
+
+.intro-card h2 {
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  font-size: clamp(1.6rem, 4vw, 2.7rem);
+}
+
+.intro-line {
+  color: rgba(255, 255, 255, 0.68);
+  margin-bottom: 15px;
+}
+
+.names-display {
+  color: #e2c985;
+  font-family: "Brush Script MT", "Segoe Script", cursive;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.1;
+}
+
+.names-display span {
+  font-family: Georgia, serif;
+  color: #fff;
+  font-size: 0.65em;
+  padding: 0 0.2em;
+}
+
+.intro-note {
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+  margin-top: 13px;
+}
+
+.card-shell {
+  position: relative;
+  max-width: 780px;
+  padding: 9px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #f4e3b5, #8f651e, #f4e3b5);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    0 0 45px rgba(127, 8, 8, 0.18);
+}
+
+.invitation-card-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 3px;
+}
+
+.card-location-hotspot {
+  position: absolute;
+  left: 65%;
+  top: 61%;
+  width: 30%;
+  height: 14%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.card-location-hotspot:focus-visible {
+  opacity: 1;
+  outline: 2px solid #c49a4a;
+}
+
+.after-card {
+  text-align: center;
+}
+
+.action-card {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  text-align: left;
+  min-height: 72px;
+  padding: 13px 16px;
+  border: 1px solid rgba(226, 201, 133, 0.2);
+  border-radius: 15px;
+  color: #f8ecd0;
+  background: rgba(255, 255, 255, 0.045);
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.action-card:hover {
+  transform: translateY(-3px);
+  background: rgba(127, 8, 8, 0.2);
+  border-color: rgba(226, 201, 133, 0.48);
+}
+
+.action-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(226, 201, 133, 0.35);
+  color: #e2c985;
+}
+
+.action-card strong,
+.action-card small {
+  display: block;
+}
+
+.action-card small {
+  margin-top: 2px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.footer-note {
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+}
+
+.rsvp-modal-content {
+  background: #fbf8ef;
+  color: var(--ink);
+  border: 0;
+  border-radius: 18px;
+}
+
+.btn-gold {
+  background: var(--wine);
+  color: #fff;
+  border: 0;
+  padding: 11px;
+}
+
+.btn-gold:hover {
+  background: var(--wine-dark);
+  color: #fff;
+}
+
+.site-toast {
+  position: fixed;
+  z-index: 200;
+  left: 50%;
+  bottom: 25px;
+  transform: translate(-50%, 25px);
+  opacity: 0;
+  pointer-events: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: #f7edda;
+  color: #280a0a;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  transition: 0.3s ease;
+}
+
+.site-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 576px) {
+  .door-copy {
+    top: 10%;
+  }
+  .door-copy h1 {
+    font-size: 2.15rem;
+  }
+  .open-door-btn {
+    bottom: 7%;
+  }
+  .bell-visual {
+    font-size: 5rem;
+  }
+  .card-shell {
+    padding: 5px;
+  }
+}
